@@ -1,0 +1,65 @@
+import 'package:flutter/material.dart';
+import 'package:islami_sat_c9/providers/settings_provider.dart';
+import 'package:islami_sat_c9/ui/screens/home_screen/tabs/quran_tab/quran_tab.dart';
+import 'package:islami_sat_c9/ui/screens/home_screen/tabs/settings/settings_tab.dart';
+import 'package:islami_sat_c9/ui/utils/app_assets.dart';
+import 'package:islami_sat_c9/ui/utils/app_colors.dart';
+import 'package:provider/provider.dart';
+import 'tabs/ahadeth_tab/ahadeth_tab.dart';
+import 'tabs/radio_tab/radio_tab.dart';
+import 'tabs/sebha_tab/sebha_tab.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+class Home extends StatefulWidget {
+  static const routeName = "home";
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int currentTabIndex = 0;
+  List<Widget> tabs = [
+    const QuranTab(),
+    AhadethTab(),
+    SebhaTab(),
+    const RadioTab(),
+    SettingsTab()
+  ];
+  late SettingsProvider provider;
+  @override
+  Widget build(BuildContext context) {
+    provider = Provider.of(context);
+    return Container(
+      decoration:BoxDecoration(
+        image: DecorationImage(image: AssetImage(
+            provider.currentMode == ThemeMode.light ? AppAssets.background : AppAssets.backgroundDark), fit: BoxFit.fill)
+      ),
+      child: Scaffold(
+        backgroundColor: AppColors.transparent,
+        appBar: AppBar(
+           title: Text(AppLocalizations.of(context)!.islami,)),
+        body: tabs[currentTabIndex],
+        bottomNavigationBar: buildBottomNavigation(),
+      ),
+    );
+  }
+
+  Widget buildBottomNavigation() => Theme(
+    data: Theme.of(context).copyWith(canvasColor: provider.currentMode == ThemeMode.light?
+    AppColors.primiary: AppColors.primiaryDark),
+    child: BottomNavigationBar(
+      onTap: (index){
+        currentTabIndex = index;
+        setState(() {});
+      },
+      currentIndex: currentTabIndex,
+      items: [
+        BottomNavigationBarItem(icon: const ImageIcon(AssetImage(AppAssets.icQuran)),label: AppLocalizations.of(context)!.quran),
+        BottomNavigationBarItem(icon: const ImageIcon(AssetImage(AppAssets.icAhadeth)),label: AppLocalizations.of(context)!.ahadeth),
+        BottomNavigationBarItem(icon: const ImageIcon(AssetImage(AppAssets.icSebha)),label: AppLocalizations.of(context)!.sebha),
+        BottomNavigationBarItem(icon: const ImageIcon(AssetImage(AppAssets.icRadio)),label:AppLocalizations.of(context)!.radio),
+        BottomNavigationBarItem(icon: const Icon(Icons.settings),label: AppLocalizations.of(context)!.settings),
+      ],
+    ),
+  );
+}
