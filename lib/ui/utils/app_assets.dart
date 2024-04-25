@@ -11,4 +11,6 @@ abstract class AppAssets{
   static const String bodySebha = "${assetsPath}bodySebha.png";
   static const String headSebha = "${assetsPath}headSebha.png";
   static const String radioImage = "${assetsPath}radio_image.png";
+  static const String lightSplash = "${assetsPath}splash.png";
+  static const String darkSplash = "${assetsPath}dark_splash.png";
 }

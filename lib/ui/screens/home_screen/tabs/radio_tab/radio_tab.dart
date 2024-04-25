@@ -1,18 +1,22 @@
 import 'dart:convert';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:islami_sat_c9/ui/screens/details_screen/radioItem.dart';
-import 'package:islami_sat_c9/ui/utils/app_assets.dart';
-import 'package:islami_sat_c9/ui/utils/app_colors.dart';
+import 'package:islami_app/ui/screens/details_screen/radioItem.dart';
+import 'package:islami_app/ui/utils/app_assets.dart';
+import 'package:islami_app/ui/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 import '../../../../../model/Radios.dart';
 import 'package:http/http.dart' as http;
+import '../../../../../providers/settings_provider.dart';
 
 class RadioTab extends StatelessWidget {
   final player = AudioPlayer();
+  late SettingsProvider provider ;
   RadioTab({super.key});
 
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context) ;
     return FutureBuilder(
         future: getRadios(),
         builder: (context, snapshot) {
@@ -22,8 +26,10 @@ class RadioTab extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(AppAssets.radioImage),
-                const Text("إذاعة القرآن الكريم",
-                    style: TextStyle(color: AppColors.accent)),
+                 Text("إذاعة القرآن الكريم",
+                    style:
+                    TextStyle(color: provider.currentMode == ThemeMode.light ?
+                    AppColors.accent : AppColors.white),),
                 const SizedBox(
                   height: 30,
                 ),

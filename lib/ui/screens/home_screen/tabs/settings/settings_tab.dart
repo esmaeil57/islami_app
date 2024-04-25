@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islami_sat_c9/providers/settings_provider.dart';
-import 'package:islami_sat_c9/ui/utils/app_colors.dart';
+import 'package:islami_app/providers/settings_provider.dart';
+import 'package:islami_app/ui/utils/app_colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:islami_sat_c9/ui/utils/app_assets.dart';
-import 'package:islami_sat_c9/ui/utils/app_colors.dart';
+import 'package:islami_app/providers/settings_provider.dart';
+import 'package:islami_app/ui/utils/app_assets.dart';
+import 'package:islami_app/ui/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 
 class SebhaTab extends StatefulWidget {
+  const SebhaTab({super.key});
 
   @override
   State<SebhaTab> createState() => _SebhaTabState();
@@ -19,9 +22,10 @@ class _SebhaTabState extends State<SebhaTab> {
       _rotationAngle += 1/33;
     });
   }
-
+  late SettingsProvider provider ;
   @override
   Widget build(BuildContext context) {
+    provider = Provider.of(context) ;
     return Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
@@ -44,10 +48,10 @@ class _SebhaTabState extends State<SebhaTab> {
                   ),
                 ),
               ),
-              const Text(
+               Text(
                 "عدد التسبيحات  ",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
-                    color: AppColors.accent),
+                    color: provider.currentMode == ThemeMode.light ? AppColors.accent : AppColors.white),
               ),
               Container(
                 padding: const EdgeInsets.all(25),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:islami_sat_c9/ui/utils/app_colors.dart';
+import 'package:islami_app/ui/utils/app_colors.dart';
 
 abstract class AppTheme{
   static const TextStyle appBarTitleTextStyle =
