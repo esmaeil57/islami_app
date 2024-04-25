@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
     const QuranTab(),
     AhadethTab(),
     SebhaTab(),
-    const RadioTab(),
+    RadioTab(),
     SettingsTab()
   ];
   late SettingsProvider provider;
